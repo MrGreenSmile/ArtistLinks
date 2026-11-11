@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="./bio/pixiv.png">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<h1>Pixiv Linker</h1>
+
+<div id="main_container"></div>
+
+
+
+<script src="./data.js" charset="utf-8"></script>
+<script charset="utf-8">
+    function bio_cell(cell, link, key){
+        let key_ = key === "wix" ? "home" : key
+        let link_ = key === "lit_link" ? "https://lit.link/ko/" + link
+         : key === "pixiv" ? "https://www.pixiv.net/users/" + link
+         : key === "fanbox" ? "https://" + link + ".fanbox.cc/"
+         : key === "twitter" ? "https://x.com/" + link
+         : key === "bluesky" ? "https://bsky.app/profile/" + link + ".bsky.social"
+         : key === "insta" ? "https://www.instagram.com/" + link
+         : key === "skeb" ? "https://skeb.jp/@" + link
+         : key === "fantia" ? "https://fantia.jp/fanclubs/" + link
+         : key === "wix" ? "https://" + link[0] + ".wixsite.com/" + link[1]
+         : null
+
+        let cell_bio_cell = document.createElement('div')
+        let cell_bio_link = document.createElement('a')
+        cell_bio_link.href = link_
+        cell_bio_link.target = "_blank"
+        let cell_bio_icon = document.createElement('img')
+        cell_bio_icon.src = "./bio/" + key_ + ".png"
+
+        cell_bio_link.appendChild(cell_bio_icon)
+        cell_bio_cell.appendChild(cell_bio_link)
+        cell.appendChild(cell_bio_cell)
+    }
+
+    let main_cont = document.getElementById("main_container")
+
+    for(var k=0; k<data.length; k++){
+        let temp_data = data[k]
+
+        let cell = document.createElement('div')
+        cell.className = "cell"
+        let cell_name = document.createElement('div')
+        cell_name.className = "cell_name"
+        cell_name.innerText = temp_data.name
+        let cell_jpname = document.createElement('span')
+        cell_jpname.innerText = temp_data.name_jp
+        cell_name.appendChild(cell_jpname)
+        cell.appendChild(cell_name)
+
+        let cell_bio = document.createElement('div')
+        cell_bio.className = "cell_bio"
+
+        if("lit_link" in temp_data){ 
+            bio_cell(cell_bio, temp_data["lit_link"], "lit_link")
+        }if("wix" in temp_data){ 
+            bio_cell(cell_bio, temp_data["wix"], "wix")
+        }if("pixiv" in temp_data){
+            for(var i=0; i<temp_data['pixiv'].length; i++){
+                bio_cell(cell_bio, temp_data["pixiv"][i], "pixiv")
+            }
+        }if("fanbox" in temp_data){
+            bio_cell(cell_bio, temp_data["fanbox"], "fanbox")
+        }if("twitter" in temp_data){
+            for(var i=0; i<temp_data['twitter'].length; i++){
+                bio_cell(cell_bio, temp_data["twitter"][i], "twitter")
+            }
+        }if("bluesky" in temp_data){
+            bio_cell(cell_bio, temp_data["bluesky"], "bluesky")
+        }if("misskey" in temp_data){
+            bio_cell(cell_bio, temp_data["misskey"], "misskey")
+        }if("insta" in temp_data){
+            bio_cell(cell_bio, temp_data["insta"], "insta")
+        }if("fantia" in temp_data){
+            bio_cell(cell_bio, temp_data["fantia"], "fantia")
+        }if("skeb" in temp_data){
+            bio_cell(cell_bio, temp_data["skeb"], "skeb")
+        }
+        
+        cell.appendChild(cell_bio)
+        main_cont.appendChild(cell)
+    }
+</script>
+</body>
+</html>

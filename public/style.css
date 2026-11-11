@@ -1,0 +1,29 @@
+h1{
+    color:#FFA500;
+}
+
+
+.cell{
+    height:75px;
+    margin-bottom:10px;
+    padding:10px;
+
+    background-color:#FFA500;
+    border-radius: 10px;
+}
+.cell_name{
+    font-size: 20px;
+    font-weight: bold;
+}
+.cell_name span{
+    font-size: 12px;
+    margin-left: 10px;
+}
+.cell_bio{
+    display: flex;
+    height: 50px;
+    align-items: end;
+}
+.cell_bio div{
+    margin: 10px;
+}
