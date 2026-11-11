@@ -41,5 +41,4 @@ let data = [
 "misskey":"npao",
 "skeb":"namaonpa"
 }
-
 ]
